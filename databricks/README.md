@@ -16,7 +16,7 @@ flowchart TD
         B_RAW["Bronze Auto Loader / Schema-on-Read<br/>raw_categories, raw_subcategories, raw_products,<br/>raw_customer_types, raw_customers, raw_sales"]
     end
 
-    subgraph Silver["Silver Layer (Cleaned & Historical)"]
+    subgraph Silver["Silver Layer (Cleaned and Historical)"]
         S_DIM_P["dim_produit (Delta SCD Type 2)"]
         S_DIM_C["dim_client (Delta SCD Type 2)"]
         S_DIM_D["dim_calendrier (Date Dimension)"]
@@ -28,7 +28,7 @@ flowchart TD
         G_FACT["fact_vente (Aggregated Star Schema Fact Table)"]
     end
 
-    subgraph Orchestration["Lakeflow Orchestration & CI/CD"]
+    subgraph Orchestration["Lakeflow Orchestration and CI/CD"]
         DAB["Databricks Asset Bundle (databricks.yml)"]
         JOB["Lakeflow Multi-Task Job DAG (sales_pipeline_job.yml)"]
         AUDIT["Equivalence Reconciler (reconcile_talend_vs_databricks.py)"]
@@ -39,7 +39,11 @@ flowchart TD
     B_RAW -.Mandatory Nulls & Duplicates.-> S_QUARANTINE
     S_DIM_P & S_DIM_C & S_DIM_D & S_SALES --> G_FACT
     G_FACT -.Watermark Update: BL_LIGNE_IN_DWH=true.-> S_SALES
-    JOB -.Executes DAG.-> B_RAW & S_DIM_P & S_DIM_C & S_SALES & G_FACT
+    JOB -.Executes DAG.-> B_RAW
+    JOB -.Executes DAG.-> S_DIM_P
+    JOB -.Executes DAG.-> S_DIM_C
+    JOB -.Executes DAG.-> S_SALES
+    JOB -.Executes DAG.-> G_FACT
     G_FACT & AUDIT -.Reconciles.-> LegacyPostgreSQL
 ```
 
@@ -47,20 +51,20 @@ flowchart TD
 
 ## Technical Mapping: Legacy Talend vs. Databricks Target
 
-| Functional Subsystem | Legacy Talend Component / Job | Modernized Databricks Architecture | Primary Target File |
-| :--- | :--- | :--- | :--- |
-| **Pipeline Master** | `jAlimentationBDD_0.1` | `PipelineAuditTracker` & `pipeline_runner.py` | `src/pipeline_runner.py` |
-| **ODS Ingestion Gate** | `jChargeODS_0.1` + `tFileList` | `validate_ingress_directory` (Fail-fast Exit 4) | `src/bronze/ingest_raw_feeds.py` |
-| **DWH Orchestration** | `jChargeDWH_0.1` | Lakeflow Task Dependencies (`depends_on`) | `resources/jobs/sales_pipeline_job.yml` |
-| **Entity Staging** | `jOdsCategorie`, `jOdsProduit`, etc. | Bronze PySpark CSV Extraction | `src/bronze/ingest_raw_feeds.py` |
-| **Reject Quarantine** | `tFilterRow` + `tUniqRow` + `ODS_REJET` | `clean_and_quarantine_feed` -> `silver_quarantine_rejets` | `src/silver/clean_reference_data.py` |
-| **Dimension SCD-2** | `jDwhProduit_0.1`, `jDwhClient_0.1` | Delta Lake `MERGE` (`is_active`, `dt_insertion`, `dt_mise_a_jour`) | `src/silver/scd2_dimension_merge.py` |
-| **Date Dimension** | `jGenerateCalendar_0.2` + POI Excel | `build_calendar_dimension` + `FrenchHolidaysCalculator` | `src/silver/build_calendar_dimension.py` |
-| **Sales Staging** | `jOdsVente_0.1` | `clean_sales_transactions` | `src/silver/clean_sales_transactions.py` |
-| **Fact Aggregation** | `jDwhVente_0.1` + `tHashOutput` | PySpark Star Join & Aggregation | `src/gold/aggregate_sales_fact.py` |
-| **Watermarking** | `BL_LIGNE_IN_DWH` in `ODS_VENTE` | Delta Lake `MERGE` update on `silver.stg_sales` | `src/gold/aggregate_sales_fact.py` |
-| **Execution Logging** | `customCode.getFormattedTime` | `format_duration()` & `PipelineAuditTracker` | `src/common/audit.py` |
-| **Configuration** | `PARAMS_LOG.CONTEXTE` | Externalized YAML (`pipeline_config.yaml`) | `config/pipeline_config.yaml` |
+|Functional Subsystem| Legacy Talend Component / Job |Modernized Databricks Architecture| Primary Target File |
+|- ---| :--- |- ---| :--- |
+|**Pipeline Master**| `jAlimentationBDD_0.1` |`PipelineAuditTracker` & `pipeline_runner.py`| `src/pipeline_runner.py` |
+|**ODS Ingestion Gate**| `jChargeODS_0.1` + `tFileList` |`validate_ingress_directory` - Fail-fast Exit 4| `src/bronze/ingest_raw_feeds.py` |
+|**DWH Orchestration**| `jChargeDWH_0.1` |Lakeflow Task Dependencies - `depends_on`| `resources/jobs/sales_pipeline_job.yml` |
+|**Entity Staging**| `jOdsCategorie`, `jOdsProduit`, etc. |Bronze PySpark CSV Extraction| `src/bronze/ingest_raw_feeds.py` |
+|**Reject Quarantine**| `tFilterRow` + `tUniqRow` + `ODS_REJET` |`clean_and_quarantine_feed` -> `silver_quarantine_rejets`| `src/silver/clean_reference_data.py` |
+|**Dimension SCD-2**| `jDwhProduit_0.1`, `jDwhClient_0.1` |Delta Lake `MERGE` - `is_active`, `dt_insertion`, `dt_mise_a_jour`| `src/silver/scd2_dimension_merge.py` |
+|**Date Dimension**| `jGenerateCalendar_0.2` + POI Excel |`build_calendar_dimension` + `FrenchHolidaysCalculator`| `src/silver/build_calendar_dimension.py` |
+|**Sales Staging**| `jOdsVente_0.1` |`clean_sales_transactions`| `src/silver/clean_sales_transactions.py` |
+|**Fact Aggregation**| `jDwhVente_0.1` + `tHashOutput` |PySpark Star Join & Aggregation| `src/gold/aggregate_sales_fact.py` |
+|**Watermarking**| `BL_LIGNE_IN_DWH` in `ODS_VENTE` |Delta Lake `MERGE` update on `silver.stg_sales`| `src/gold/aggregate_sales_fact.py` |
+|**Execution Logging**| `customCode.getFormattedTime` |`format_duration - ` & `PipelineAuditTracker`| `src/common/audit.py` |
+|**Configuration**| `PARAMS_LOG.CONTEXTE` |Externalized YAML - `pipeline_config.yaml`| `config/pipeline_config.yaml` |
 
 ---
 
