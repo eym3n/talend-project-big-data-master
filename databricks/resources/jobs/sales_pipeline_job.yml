@@ -1,0 +1,77 @@
+resources:
+  jobs:
+    sales_pipeline_daily:
+      name: "[PROD] Sales Data Warehouse Daily Ingestion Pipeline"
+      tags:
+        domain: "sales_analytics"
+        source: "talend_modernization"
+        tier: "production"
+
+      schedule:
+        quartz_cron_expression: "0 0 4 * * ?"
+        timezone_id: "Europe/Paris"
+        pause_status: "UNPAUSED"
+
+      email_notifications:
+        on_failure:
+          - "data-engineering-alerts@enterprise.com"
+
+      job_clusters:
+        - job_cluster_key: "standard_etl_cluster"
+          new_cluster:
+            spark_version: "14.3.x-scala2.12"
+            node_type_id: "Standard_D4ds_v5"
+            num_workers: 2
+            spark_conf:
+              spark.sql.extensions: "io.delta.sql.DeltaSparkSessionExtension"
+              spark.sql.catalog.spark_catalog: "org.apache.spark.sql.delta.catalog.DeltaCatalog"
+
+      tasks:
+        - task_key: "validate_directory_ingress"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/bronze/ingest_raw_feeds.py"
+            parameters:
+              - "--validate-only"
+
+        - task_key: "ingest_bronze_feeds"
+          depends_on:
+            - task_key: "validate_directory_ingress"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/bronze/ingest_raw_feeds.py"
+
+        - task_key: "build_calendar_dimension"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/silver/build_calendar_dimension.py"
+
+        - task_key: "merge_silver_dimensions"
+          depends_on:
+            - task_key: "ingest_bronze_feeds"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/silver/scd2_dimension_merge.py"
+
+        - task_key: "stage_silver_sales"
+          depends_on:
+            - task_key: "ingest_bronze_feeds"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/silver/clean_sales_transactions.py"
+
+        - task_key: "aggregate_gold_sales_fact"
+          depends_on:
+            - task_key: "merge_silver_dimensions"
+            - task_key: "stage_silver_sales"
+            - task_key: "build_calendar_dimension"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "src/gold/aggregate_sales_fact.py"
+
+        - task_key: "reconciliation_audit"
+          depends_on:
+            - task_key: "aggregate_gold_sales_fact"
+          job_cluster_key: "standard_etl_cluster"
+          spark_python_task:
+            python_file: "tests/equivalence/reconcile_talend_vs_databricks.py"

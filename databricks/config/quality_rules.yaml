@@ -1,0 +1,44 @@
+# Quality Rules and Quarantine Configuration
+rules:
+  category:
+    mandatory_fields:
+      - "CD_CATEGORIE"
+      - "LB_CATEGORIE"
+  subcategory:
+    mandatory_fields:
+      - "CD_SOUS_CATEGORIE"
+      - "LB_SOUS_CATEGORIE"
+      - "CD_CATEGORIE"
+  product:
+    mandatory_fields:
+      - "CD_PRODUIT"
+      - "NOM_PRODUIT"
+      - "PRIX_ACHAT_PRODUIT"
+      - "PRIX_VENTE_PRODUIT"
+      - "CD_SOUS_CATEGORIE"
+  customer_type:
+    mandatory_fields:
+      - "CD_TYPE_CLIENT"
+      - "LB_TYPE_CLIENT"
+  customer:
+    mandatory_fields:
+      - "ID_CLIENT"
+      - "NOM_CLIENT"
+      - "PREN_CLIENT"
+      - "VILLE_CLIENT"
+      - "PAYS_CLIENT"
+      - "REGION_CLIENT"
+      - "CD_TYPE_CLIENT"
+  sales:
+    mandatory_fields:
+      - "ID_VENTE"
+      - "CD_PRODUIT"
+      - "DT_VENTE"
+      - "ID_CLIENT"
+      - "QTE_VENTE"
+      - "PRIX_ACHAT"
+      - "PRIX_VENTE"
+
+rejection_messages:
+  null_values: "Valeurs nulles pour certain colonnes"
+  duplicate_data: "Donnees en double"

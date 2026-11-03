@@ -1,0 +1,48 @@
+# Pipeline Configuration for Talend to Databricks Modernization
+catalog: "vente_catalog"
+
+schemas:
+  bronze: "bronze"
+  silver: "silver"
+  gold: "gold"
+
+storage:
+  landing_volume: "/Volumes/vente_catalog/bronze/raw_landing"
+  local_fallback_path: "csvFiles"
+
+file_formats:
+  delimiter: "|"
+  encoding: "UTF-8"
+  header: true
+  infer_schema: false
+
+feeds:
+  category:
+    pattern: "ICOM_*_CATEGORY.csv"
+    bronze_table: "raw_categories"
+    business_keys: ["CD_CATEGORIE"]
+  subcategory:
+    pattern: "ICOM_*_SOUS_CATEGORIE.csv"
+    bronze_table: "raw_subcategories"
+    business_keys: ["CD_SOUS_CATEGORIE"]
+  product:
+    pattern: "ICOM_*_PRODUIT.csv"
+    bronze_table: "raw_products"
+    business_keys: ["CD_PRODUIT"]
+  customer_type:
+    pattern: "ICOM_*_TYPE_CLIENT.csv"
+    bronze_table: "raw_customer_types"
+    business_keys: ["CD_TYPE_CLIENT"]
+  customer:
+    pattern: "ICOM_*_CUSTOMER.csv"
+    bronze_table: "raw_customers"
+    business_keys: ["ID_CLIENT"]
+  sales:
+    pattern: "ICOM_*_VENTE.csv"
+    bronze_table: "raw_sales"
+    business_keys: ["ID_VENTE", "CD_PRODUIT"]
+
+calendar:
+  start_date: "2020-01-01"
+  end_date: "2030-12-31"
+  holidays_file: "joursFeries.xlsx"

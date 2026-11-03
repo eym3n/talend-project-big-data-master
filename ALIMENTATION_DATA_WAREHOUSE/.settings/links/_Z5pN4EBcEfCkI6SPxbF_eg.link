@@ -1,0 +1,49 @@
+{
+  "itemId" : "_Z5pN4EBcEfCkI6SPxbF_eg",
+  "contextList" : [ {
+    "contextName" : "Default",
+    "repoId" : "_Fvi44D-oEfCJkrHegI1I0A",
+    "parameterList" : [ {
+      "id" : "_Fv3pBD-oEfCJkrHegI1I0A",
+      "name" : "schema_ods"
+    } ]
+  }, {
+    "contextName" : "Default",
+    "repoId" : "_eX4gkD-oEfCJkrHegI1I0A",
+    "parameterList" : [ {
+      "id" : "_Fv3pBz-oEfCJkrHegI1I0A",
+      "name" : "additionalParam"
+    }, {
+      "id" : "_Fv3pAj-oEfCJkrHegI1I0A",
+      "name" : "database"
+    }, {
+      "id" : "_Fv3pBj-oEfCJkrHegI1I0A",
+      "name" : "password"
+    }, {
+      "id" : "_Fv3pAz-oEfCJkrHegI1I0A",
+      "name" : "port"
+    }, {
+      "id" : "_Fv3pBD-oEfCJkrHegI1I0A",
+      "name" : "schema_param"
+    }, {
+      "id" : "_Fv3pAT-oEfCJkrHegI1I0A",
+      "name" : "ServerName"
+    }, {
+      "id" : "_Fv3pBT-oEfCJkrHegI1I0A",
+      "name" : "utilisateur"
+    } ]
+  }, {
+    "contextName" : "Default",
+    "repoId" : "_DLvp8D-pEfCJkrHegI1I0A",
+    "parameterList" : [ {
+      "id" : "_DL-Tcz-pEfCJkrHegI1I0A",
+      "name" : "encodage"
+    }, {
+      "id" : "_DL-Tcj-pEfCJkrHegI1I0A",
+      "name" : "fieldSeparator"
+    }, {
+      "id" : "_DL-TcT-pEfCJkrHegI1I0A",
+      "name" : "projectFolder"
+    } ]
+  } ]
+}

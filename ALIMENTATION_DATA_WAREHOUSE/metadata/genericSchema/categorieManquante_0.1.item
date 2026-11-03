@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:TalendMetadata="http://www.talend.org/metadata/connection/2010">
+  <TalendMetadata:GenericSchemaConnection xmi:id="_O8QV4D_xEfCKRsV5rpSp5g" comment="connectionComment" label="connectionLabel" dataPackage="_O8QV4T_xEfCKRsV5rpSp5g"/>
+  <TalendMetadata:GenericPackage xmi:id="_O8QV4T_xEfCKRsV5rpSp5g" dataManager="_O8QV4D_xEfCKRsV5rpSp5g">
+    <ownedElement xsi:type="TalendMetadata:MetadataTable" xmi:id="_O8QV4j_xEfCKRsV5rpSp5g" label="metadata">
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV4z_xEfCKRsV5rpSp5g" name="LB_CHEMIN_FICHIER" id="21986" label="LB_CHEMIN_FICHIER" length="255" sourceType="VARCHAR" talendType="id_String" key="true" nullable="false">
+        <initialValue xmi:id="_O8QV5D_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV5T_xEfCKRsV5rpSp5g" name="LB_NOM_FICHIER" id="21987" label="LB_NOM_FICHIER" length="100" sourceType="VARCHAR" talendType="id_String" key="true" nullable="false">
+        <initialValue xmi:id="_O8QV5j_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV5z_xEfCKRsV5rpSp5g" name="NUM_LIGNE_REJET" id="21988" label="NUM_LIGNE_REJET" length="10" sourceType="INT4" talendType="id_Integer" key="true" nullable="false">
+        <initialValue xmi:id="_O8QV6D_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV6T_xEfCKRsV5rpSp5g" name="LB_LIGNE_REJET" id="21989" label="LB_LIGNE_REJET" length="500" sourceType="VARCHAR" talendType="id_String" key="true" nullable="false">
+        <initialValue xmi:id="_O8QV6j_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV6z_xEfCKRsV5rpSp5g" name="LB_MESSAGE_REJET" id="21990" label="LB_MESSAGE_REJET" length="100" sourceType="VARCHAR" talendType="id_String" nullable="false">
+        <initialValue xmi:id="_O8QV7D_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV7T_xEfCKRsV5rpSp5g" name="LB_NOM_FLUX" id="21991" label="LB_NOM_FLUX" length="100" sourceType="VARCHAR" talendType="id_String" nullable="false">
+        <initialValue xmi:id="_O8QV7j_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV7z_xEfCKRsV5rpSp5g" name="DT_REJET" id="21992" label="DT_REJET" length="29" precision="6" sourceType="TIMESTAMP" talendType="id_Date" nullable="false" pattern="&quot;dd-MM-yyyy HH:mm:ss&quot;">
+        <initialValue xmi:id="_O8QV8D_xEfCKRsV5rpSp5g"/>
+      </feature>
+      <feature xsi:type="TalendMetadata:MetadataColumn" xmi:id="_O8QV8T_xEfCKRsV5rpSp5g" name="LB_JOB_NAME" id="21993" label="LB_JOB_NAME" length="100" sourceType="VARCHAR" talendType="id_String" nullable="false">
+        <initialValue xmi:id="_O8QV8j_xEfCKRsV5rpSp5g"/>
+      </feature>
+    </ownedElement>
+  </TalendMetadata:GenericPackage>
+</xmi:XMI>

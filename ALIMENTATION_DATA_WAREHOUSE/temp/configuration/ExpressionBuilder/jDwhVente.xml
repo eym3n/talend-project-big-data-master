@@ -1,0 +1,58 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<expression:EMFExpression xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:expression="http:///expression.ecore" id="tMap_1=>" expression="row1.QTE_VENTE">
+  <variables name="row1.ID_VENTE" value="null" talendType="id_String"/>
+  <variables name="row1.CD_PRODUIT" value="null" talendType="id_String"/>
+  <variables name="row1.DT_VENTE" value="null" talendType="id_Date"/>
+  <variables name="row1.ID_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row1.QTE_VENTE" value="0" talendType="id_Integer"/>
+  <variables name="row1.PRIX_ACHAT" value="null" talendType="id_BigDecimal"/>
+  <variables name="row1.PRIX_VENTE" value="null" talendType="id_BigDecimal"/>
+  <variables name="row1.LB_NOM_FICHIER" value="null" talendType="id_String"/>
+  <variables name="row1.DT_INSERTION" value="null" talendType="id_Date"/>
+  <variables name="row1.LB_JOB_NAME" value="null" talendType="id_String"/>
+  <variables name="row1.BL_LIGNE_IN_DWH" value="false" talendType="id_Boolean"/>
+  <variables name="row2.ID_DIM_PRODUIT" value="0" talendType="id_Integer"/>
+  <variables name="row2.CD_PRODUIT" value="null" talendType="id_String"/>
+  <variables name="row2.NOM_PRODUIT" value="null" talendType="id_String"/>
+  <variables name="row2.PRIX_ACHAT_PRODUIT" value="null" talendType="id_BigDecimal"/>
+  <variables name="row2.PRIX_VENTE_PRODUIT" value="null" talendType="id_BigDecimal"/>
+  <variables name="row2.CD_SOUS_CATEGORIE" value="null" talendType="id_String"/>
+  <variables name="row2.LB_SOUS_CATEGORIE" value="null" talendType="id_String"/>
+  <variables name="row2.CD_CATEGORIE" value="null" talendType="id_String"/>
+  <variables name="row2.LB_CATEGORIE" value="null" talendType="id_String"/>
+  <variables name="row2.DT_INSERTION" value="null" talendType="id_Date"/>
+  <variables name="row2.DT_MISE_A_JOUR" value="null" talendType="id_Date" nullable="true"/>
+  <variables name="row2.BL_LIGNE_ACTIVE" value="0" talendType="id_Integer"/>
+  <variables name="row2.LB_JOB_NAME" value="null" talendType="id_String"/>
+  <variables name="row3.ID_DIM_CALENDRIER" value="0" talendType="id_Integer"/>
+  <variables name="row3.DT_JOUR" value="null" talendType="id_Date"/>
+  <variables name="row3.NB_ANNEE" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_SEMESTRE" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_TRIMESTRE" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_MOIS" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_JOUR_ANNEE" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_JOUR_MOIS" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_JOUR_SEMAINE" value="0" talendType="id_Integer"/>
+  <variables name="row3.NB_SEMAINE_ANNEE" value="0" talendType="id_Integer"/>
+  <variables name="row3.LB_MOIS" value="null" talendType="id_String"/>
+  <variables name="row3.LB_JOUR" value="null" talendType="id_String"/>
+  <variables name="row3.BL_DERNIER_JOUR_MOIS" value="0" talendType="id_Integer"/>
+  <variables name="row3.BL_BISSEXTILE" value="0" talendType="id_Integer"/>
+  <variables name="row3.BL_WEEK_END" value="0" talendType="id_Integer"/>
+  <variables name="row3.BL_JOUR_FERIE" value="0" talendType="id_Integer"/>
+  <variables name="row3.LB_JOUR_FERIE" value="null" talendType="id_String" nullable="true"/>
+  <variables name="row4.ID_DIM_CLIENT" value="0" talendType="id_Integer"/>
+  <variables name="row4.ID_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.NOM_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.PREN_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.CD_POSTAL_CLIENT" value="null" talendType="id_String" nullable="true"/>
+  <variables name="row4.VILLE_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.PAYS_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.REGION_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.CD_TYPE_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.LB_TYPE_CLIENT" value="null" talendType="id_String"/>
+  <variables name="row4.DT_INSERTION" value="null" talendType="id_Date"/>
+  <variables name="row4.DT_MISE_A_JOUR" value="null" talendType="id_Date" nullable="true"/>
+  <variables name="row4.BL_LIGNE_ACTIVE" value="0" talendType="id_Integer"/>
+  <variables name="row4.LB_JOB_NAME" value="null" talendType="id_String"/>
+</expression:EMFExpression>
